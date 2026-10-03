@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { PostContext } from '../App';
+import { useState, useContext } from 'react';
+import { PostContext } from '../context/PostContext';
 
 const CommentForm = () => {
   const { comments, setComments } = useContext(PostContext);

@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { PostContext } from '../App';
+import { useContext } from 'react';
+import { PostContext } from '../context/PostContext';
 import CommentForm from './commentform';
 import ListComments from './listcomments';
 

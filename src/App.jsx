@@ -1,23 +1,35 @@
-import React, { useState, createContext } from 'react';
-import Post from './components/post';
+import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import ProtectedRoute from './components/ProtectedRoute';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Registro from './pages/Registro';
+import Perfil from './pages/Perfil';
+import Chat from './pages/Chat';
+import Grupos from './pages/Grupos';
+import Configuracion from './pages/Configuracion';
+import NotFound from './pages/NotFound';
+import { PostProvider } from './context/PostContext';
 import './App.css';
 
-export const PostContext = createContext();
-
 function App() {
-  const [likes, setLikes] = useState(248);
-  const [shares, setShares] = useState(36);
-  const [comments, setComments] = useState([
-    { id: 1, text: "Me gustan mucho los postres", replies: [] },
-    { id: 2, text: "Pasame la receta", replies: [] }
-  ]);
-
   return (
-    <PostContext.Provider value={{ likes, setLikes, shares, setShares, comments, setComments }}>
-      <div className="container mt-5 d-flex justify-content-center">
-        <Post />
-      </div>
-    </PostContext.Provider>
+    <PostProvider>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/registro" element={<Registro />} />
+        
+        <Route element={<Layout />}>
+          <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+          <Route path="/perfil" element={<ProtectedRoute><Perfil /></ProtectedRoute>} />
+          <Route path="/chat" element={<ProtectedRoute><Chat /></ProtectedRoute>} />
+          <Route path="/grupos" element={<ProtectedRoute><Grupos /></ProtectedRoute>} />
+          <Route path="/configuracion" element={<ProtectedRoute><Configuracion /></ProtectedRoute>} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </PostProvider>
   );
 }
 

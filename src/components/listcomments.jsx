@@ -1,5 +1,5 @@
-import React, { useState, useContext, useRef } from 'react';
-import { PostContext } from '../App';
+import { useState, useContext, useRef } from 'react';
+import { PostContext } from '../context/PostContext';
 
 const ListComments = () => {
   const { comments, setComments } = useContext(PostContext);
