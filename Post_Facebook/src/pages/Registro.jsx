@@ -18,13 +18,14 @@ const Registro = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const success = register(formData);
-    if (success) {
-      navigate('/');
+    setError('');
+    const result = await register(formData);
+    if (result.success) {
+      navigate('/login');
     } else {
-      setError('El correo ya está registrado.');
+      setError(result.message || 'Error al registrarse. Inténtalo de nuevo.');
     }
   };
 
